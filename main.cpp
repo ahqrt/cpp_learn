@@ -1,28 +1,37 @@
 #include <iostream>
 #include <string>
 
+using namespace std;
+
+
+struct inflatable
+{
+    string name;
+    float volume;
+    double price;
+};
+
+//union
+
+union one4all
+{
+    int int_val;
+    long log_val;
+    double double_val;
+};
+
+
 int main() {
-    using namespace std;
-
-    char charr1[20];
-    char charr2[20] = "jaguar";
-
-    string str1;
-    string str2 = "panther";
-
-    cout << "Enter a kind of feline: \n";
-    cin >> charr1;
-    cout << "Enter another kind of feline: \n";
-    cin >> str1;
-
-    cout << charr1 << " " << charr2 << " "
-        << str1 << " " << str2 << endl;
-
-    cout << "The tird letter in "<< charr2 << " is "
-        << charr2[2] << endl;
-
-    cout << "The third letter in "<< str2 << " is "
-        << str2[2] << endl;
+//    init a struct
+    inflatable hat {"hello", 100, 10};
+//    struct can store different type
+//    but union can only store on type and one value
+    one4all pail;
+    pail.int_val = 4;
+    cout << pail.int_val << endl;
+    pail.double_val = 1.34;
+    cout << pail.int_val << endl;
+    cout << pail.double_val << endl;
 
     return 0;
 }
