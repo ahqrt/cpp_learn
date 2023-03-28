@@ -1,21 +1,28 @@
 #include <iostream>
+#include <string>
 
 int main() {
     using namespace std;
 
-    const int ArSize = 20;
-    char name[ArSize];
-    char dessert[ArSize];
+    char charr1[20];
+    char charr2[20] = "jaguar";
 
+    string str1;
+    string str2 = "panther";
 
-    cout << "Enter your name\n";
-    cin >> name;
+    cout << "Enter a kind of feline: \n";
+    cin >> charr1;
+    cout << "Enter another kind of feline: \n";
+    cin >> str1;
 
-    cout << "Enter your favorite dessert:\n";
-    cin >> dessert;
+    cout << charr1 << " " << charr2 << " "
+        << str1 << " " << str2 << endl;
 
-    cout << "I have some delicious " << dessert;
-    cout << " for you, " <<name << endl;
+    cout << "The tird letter in "<< charr2 << " is "
+        << charr2[2] << endl;
+
+    cout << "The third letter in "<< str2 << " is "
+        << str2[2] << endl;
 
     return 0;
 }
