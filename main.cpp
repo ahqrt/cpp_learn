@@ -21,6 +21,8 @@ union one4all
 };
 
 
+enum spectrum { red, orange, yellow, blue, green, violet };
+
 int main() {
 //    init a struct
     inflatable hat {"hello", 100, 10};
@@ -32,6 +34,10 @@ int main() {
     pail.double_val = 1.34;
     cout << pail.int_val << endl;
     cout << pail.double_val << endl;
+
+    spectrum band = spectrum::green;
+
+    cout << band << endl;
 
     return 0;
 }
