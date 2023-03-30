@@ -17,6 +17,12 @@ T getLargestNumber(const vector<T>& vect)
     return largestNumber;
 }
 
+template<typename T1, typename T2, typename = std::enable_if<std::is_integral_v<T1> && std::is_floating_point_v<T2>>>
+auto getBiggerNum(T1 param1, T2 param2)
+{
+    return param1 > param2 ? param1 : param2;
+}
+
 
 int main()
 {
@@ -27,6 +33,8 @@ int main()
     auto result1 = getLargestNumber(vect1);
     auto result2 = getLargestNumber(vect2);
 
+    auto res = getBiggerNum(10, 100.0);
+    cout << res << endl;
     cout << result1 << endl;
     cout << result2 << endl;
 
