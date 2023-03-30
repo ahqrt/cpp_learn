@@ -52,6 +52,12 @@ build CMakeFiles/cpp_learn.dir/main.cpp.o: CXX_COMPILER__cpp_learn_Debug /Users/
   OBJECT_DIR = CMakeFiles/cpp_learn.dir
   OBJECT_FILE_DIR = CMakeFiles/cpp_learn.dir
 
+build CMakeFiles/cpp_learn.dir/Message.cpp.o: CXX_COMPILER__cpp_learn_Debug /Users/ahqrt/Desktop/work_sty/cpp_learn/Message.cpp || cmake_object_order_depends_target_cpp_learn
+  DEP_FILE = CMakeFiles/cpp_learn.dir/Message.cpp.o.d
+  FLAGS = -g -arch arm64 -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX13.1.sdk -mmacosx-version-min=12.6 -fcolor-diagnostics -std=gnu++20
+  OBJECT_DIR = CMakeFiles/cpp_learn.dir
+  OBJECT_FILE_DIR = CMakeFiles/cpp_learn.dir
+
 
 # =============================================================================
 # Link build statements for EXECUTABLE target cpp_learn
@@ -60,7 +66,7 @@ build CMakeFiles/cpp_learn.dir/main.cpp.o: CXX_COMPILER__cpp_learn_Debug /Users/
 #############################################
 # Link the executable cpp_learn
 
-build cpp_learn: CXX_EXECUTABLE_LINKER__cpp_learn_Debug CMakeFiles/cpp_learn.dir/main.cpp.o
+build cpp_learn: CXX_EXECUTABLE_LINKER__cpp_learn_Debug CMakeFiles/cpp_learn.dir/main.cpp.o CMakeFiles/cpp_learn.dir/Message.cpp.o
   FLAGS = -g -arch arm64 -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX13.1.sdk -mmacosx-version-min=12.6
   OBJECT_DIR = CMakeFiles/cpp_learn.dir
   POST_BUILD = :
