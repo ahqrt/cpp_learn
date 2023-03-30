@@ -12,31 +12,42 @@ using namespace std;
 class Message
 {
 public:
-    // 复制构造函数 也是浅拷贝
-    Message(const Message& msg) = delete;
-    // = 运算符
-    void operator= (const Message& msg) = delete;
-    ~Message() {
-        instance = nullptr;
-    };
-    static Message* getInstance() {
-        if (instance == nullptr) {
-            instance = new Message();
-        }
-        return instance;
-    };
+    Message(): MessageId{createMessageId()} {}
     const int MessageId;
+    virtual void sendMessage() {};
 
 private:
-    //    把构造函数设置为私有化，这样对象就不能初始化了
-    Message() : MessageId {createMessageId()}{};
-
     int createMessageId() {
         std::random_device dev;
         return dev();
     }
+};
 
-    inline static Message* instance {nullptr};
+class TextMessage : public Message
+{
+public:
+    TextMessage() : Message() {};
+
+    void sendMessage() override { //重写父类消息
+        cout << "发送文本消息" << MessageId << ":" << Text << endl;
+    };
+
+    string Text;
+};
+
+class FileMessage: public Message
+{
+public:
+    FileMessage(): Message() {};
+    void sendMessage() override {
+        cout << "发送文件消息：" << MessageId << ":" << FilePath << endl;
+    };
+    string FilePath;
+};
+
+
+void Send(Message& msg) {
+    msg.sendMessage();
 };
 
 #endif //CPP_LEARN_MESSAGE_H
