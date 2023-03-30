@@ -24,18 +24,57 @@ auto getBiggerNum(T1 param1, T2 param2)
 }
 
 
+// 模版类 键值对
+template <typename T>
+class KeyValPair
+{
+public:
+    string key;
+    T value;
+    KeyValPair(string k, T v): key(k), value(v) {};
+};
+
+// 模版类 键值字典
+template <typename T>
+class Dic
+{
+public:
+    vector<KeyValPair<T>> vect;
+    Dic() = default;
+    void pushBack(KeyValPair<T> val)
+    {
+        vect.push_back(val);
+    };
+
+    auto operator[](string key)
+    {
+        for (KeyValPair<T>& pair: vect) {
+            if (pair.key == key) {
+                return pair.value;
+            }
+        }
+    }
+};
+
+
 int main()
 {
 
-    vector<int> vect1 {1, 2, 3, 4, 5, 6};
-    vector<double> vect2{1.1,2.2,3.3,4.4,9.9,8.8,7.7,6.6};
+//    vector<int> vect1 {1, 2, 3, 4, 5, 6};
+//    vector<double> vect2{1.1,2.2,3.3,4.4,9.9,8.8,7.7,6.6};
+//
+//    auto result1 = getLargestNumber(vect1);
+//    auto result2 = getLargestNumber(vect2);
+//
+//    auto res = getBiggerNum(10, 100.0);
+//    cout << res << endl;
+//    cout << result1 << endl;
+//    cout << result2 << endl;
 
-    auto result1 = getLargestNumber(vect1);
-    auto result2 = getLargestNumber(vect2);
+    Dic<int> dic;
+    dic.pushBack({"test1", 123});
+    dic.pushBack({"test2", 234});
+    dic.pushBack({"test3", 345});
 
-    auto res = getBiggerNum(10, 100.0);
-    cout << res << endl;
-    cout << result1 << endl;
-    cout << result2 << endl;
-
+    cout << dic["test2"] << endl;
 }
