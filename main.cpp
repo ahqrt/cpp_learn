@@ -2,7 +2,7 @@
 #include <iostream>
 #include <memory>
 #include "Message.h"
-
+#include <functional>
 // 函数模版
 template <typename T, typename = std::enable_if_t<std::is_integral_v<T> || std::is_floating_point_v<T>>>
 T getLargestNumber(const vector<T>& vect)
@@ -57,24 +57,38 @@ public:
 };
 
 
+//void print(string& content) {
+//    cout << content << endl;
+//}
+
+// 为函数指针定义别名
+using printType = void (*) (string&);
+
+// 最好使用标准库的function模版
+//void callPrint(printType f, string& param) {
+void callPrint(function<void(string&)> f, string& param) {
+    f(param);
+}
+auto print = [](auto param) {
+    std::cout << param << std::endl;
+};
+
 int main()
 {
-
-//    vector<int> vect1 {1, 2, 3, 4, 5, 6};
-//    vector<double> vect2{1.1,2.2,3.3,4.4,9.9,8.8,7.7,6.6};
-//
-//    auto result1 = getLargestNumber(vect1);
-//    auto result2 = getLargestNumber(vect2);
-//
-//    auto res = getBiggerNum(10, 100.0);
-//    cout << res << endl;
-//    cout << result1 << endl;
-//    cout << result2 << endl;
-
-    Dic<int> dic;
-    dic.pushBack({"test1", 123});
-    dic.pushBack({"test2", 234});
-    dic.pushBack({"test3", 345});
-
-    cout << dic["test2"] << endl;
+////    string content{"hello world"};
+////
+//////    callPrint(print, content);
+////    vector<int> vect{ 0,1,2,3,4,5,6,7,8,9 };
+//////    C++ 中的匿名函数通常以 [capture](parameters) -> returnType { body }
+////    for_each(begin(vect), end(vect), [](int param) {
+////        cout << param << endl;
+////    });
+//    string str { "等忙完这一阵子，" };
+//    string str2 {"就可以接着忙下一阵子了。"};
+//    auto print = [&str](string& param) {
+//        string str2 { "马克思说：" };
+//        //输出： 马克思说：等忙完这一阵子，就可以接着忙下一阵子了。
+//        cout << str2 << str << param << std::endl;
+//    };
+    print(123);
 }
