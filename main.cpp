@@ -3,23 +3,31 @@
 #include <memory>
 #include "Message.h"
 
-class MyClass
+// 函数模版
+template <typename T, typename = std::enable_if_t<std::is_integral_v<T> || std::is_floating_point_v<T>>>
+T getLargestNumber(const vector<T>& vect)
 {
-public:
-    int val;
-    MyClass(int value):val(value){};
-    ~MyClass(){};
-};
+    T largestNumber {vect.at(0)};
+
+    for (auto& val : vect) {
+        if (val > largestNumber) {
+            largestNumber = val;
+        }
+    }
+    return largestNumber;
+}
+
 
 int main()
 {
-    unique_ptr<MyClass> myClass = make_unique<MyClass>(10);
-//    auto myClass2 = myClass;  error 独占指针不能复制
 
-    //一旦被重新赋值，之前关联的堆空间立即被释放
-    myClass = make_unique<MyClass>(20);
+    vector<int> vect1 {1, 2, 3, 4, 5, 6};
+    vector<double> vect2{1.1,2.2,3.3,4.4,9.9,8.8,7.7,6.6};
 
+    auto result1 = getLargestNumber(vect1);
+    auto result2 = getLargestNumber(vect2);
 
-// weak_ptr   弱指针主要是用于解决共享指针的循环引用问题
-    cout << myClass->val << endl;
+    cout << result1 << endl;
+    cout << result2 << endl;
+
 }
