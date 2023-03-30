@@ -6,21 +6,37 @@
 #define CPP_LEARN_MESSAGE_H
 
 #include <string>
+#include <random>
 using namespace std;
 
 class Message
 {
 public:
-    Message(int fromUserId, int toUserId, string& messageContent);
-    void sendMessage();
+    // 复制构造函数 也是浅拷贝
+    Message(const Message& msg) = delete;
+    // = 运算符
+    void operator= (const Message& msg) = delete;
+    ~Message() {
+        instance = nullptr;
+    };
+    static Message* getInstance() {
+        if (instance == nullptr) {
+            instance = new Message();
+        }
+        return instance;
+    };
     const int MessageId;
-    const int ToUserId;
-    const int FromUserId;
-    const string& MessageContent;
-    static inline int MsgCount{0};
 
 private:
-    int createMessageId();
+    //    把构造函数设置为私有化，这样对象就不能初始化了
+    Message() : MessageId {createMessageId()}{};
+
+    int createMessageId() {
+        std::random_device dev;
+        return dev();
+    }
+
+    inline static Message* instance {nullptr};
 };
 
 #endif //CPP_LEARN_MESSAGE_H
