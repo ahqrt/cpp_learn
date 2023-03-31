@@ -1,23 +1,20 @@
 #include <iostream>
-#include <vector>
-#include <set>
-
+#include <thread>  //线程类型在此头文件中定义
+#include <string>
 using namespace std;
 
 int main() {
-//    vector<int> myVector {1, 2, 3};
-//    myVector.push_back(4);
-//
-//    myVector.insert(myVector.begin(), 4);
-//
-////    myVector.erase(myVector.begin(), myVector.begin()+ 2);
-//    myVector.erase(myVector.begin() + 2);
-//    for (auto& item: myVector) {
-//        cout << item << endl;
-//    }
+    auto func = [](int tId, int num) {
+        for (std::size_t i = 0; i < num; i++) {
+            string str = "thread id" + to_string(tId) + " print: " + to_string(i) + "\n";
+            cout << str;
+        }
+    };
 
-set<int> s {1, 2, 3};
+    int num = 6;
 
-cout << *s.begin() << endl;
-
+    thread t(func, 0, std::ref(num));
+//    thread t2(func, 1, 6);
+    t.join();
+//    t2.join();
 }
