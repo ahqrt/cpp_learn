@@ -1,23 +1,28 @@
 #include <iostream>
-#include <thread>
+#include <chrono>
+#include <future>  //future与async都是在此定义的
 #include <string>
 using namespace std;
 
+/**
+ * 等待线程的返回值
+ * 使用标准库为我们提供的 std::async 方法和 std::future 对象来获取线程的返回值
+ */
+
+
 int main() {
-    auto func = [](int i) {
-        string str = "第" + to_string(i) + "个线程在工作"+ "\n";
-        cout << str;
+    auto func = [](int num)->int {
+        cout << "线程已经开始执行啦" << endl;
+        this_thread::sleep_for(chrono::seconds(6)); //子线程等待6秒
+        cout << "线程执行结束啦" << endl;
+        return num*3;
     };
-    //我的实验设备CPU为i9-9900K，8核16线程
-    //此处得到的值为16
-    int threadNum = thread::hardware_concurrency();
-    threadNum = threadNum == 0 ? 2 : threadNum;  //确保线程数量不要为0
-    threadNum = min(threadNum, 32);  //确保线程数量不要超过32个
-    //输出：我的电脑可以开启16个线程
-    cout << "我的电脑可以开启" << threadNum << "个线程" << endl;
-    for (size_t i = 0; i < threadNum; ++i) {
-        thread t(func,i);
-        t.detach();
-    }
-    auto c = getchar();
+
+//    使用 async 方法创建一个线程，此方法返回一个 future 对象
+    future<int> result = async(func, 2);
+    this_thread::sleep_for(chrono::seconds(3));
+    cout << "开始获取线程返回值" << endl; //输出：开始获取线程返回值
+    int val = result.get(); //获取线程返回值，这里会等待线程执行结束
+    cout << "线程执行结果为" << val << endl;  //线程执行结果为369
+
 }
