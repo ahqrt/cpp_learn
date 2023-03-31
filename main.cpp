@@ -1,31 +1,23 @@
 #include <iostream>
-#include <string>
-#include <format>
+#include <vector>
+#include <set>
 
 using namespace std;
 
-//移除字符串左侧空白符
-void ltrim(string& s) {
-    auto endPosition = find_if(s.begin(), s.end(), [](unsigned char ch) {
-        return !isspace(ch);
-    });
-    s.erase(s.begin(), endPosition);
-};
-
-
-void replace(function<void (string& a)> fn, string& s)
-{
-    fn(s);
-}
-
-void print(string& s) {
-    cout << s << endl;
-}
-
 int main() {
-    string string1 {"    liuliu"};
+//    vector<int> myVector {1, 2, 3};
+//    myVector.push_back(4);
+//
+//    myVector.insert(myVector.begin(), 4);
+//
+////    myVector.erase(myVector.begin(), myVector.begin()+ 2);
+//    myVector.erase(myVector.begin() + 2);
+//    for (auto& item: myVector) {
+//        cout << item << endl;
+//    }
 
-    replace( [](string& s) {
-        cout << s << endl;
-    }, string1);
+set<int> s {1, 2, 3};
+
+cout << *s.begin() << endl;
+
 }
